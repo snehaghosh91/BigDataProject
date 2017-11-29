@@ -5,5 +5,6 @@ from operator import add
 if __name__ == "__main__":
     sc = SparkContext()
     col = fetch_column(sc, 0)
-    col.count()
+    counts  = col.count()
+    counts.saveAsTextFile("col1_statistics.out")
     sc.stop()

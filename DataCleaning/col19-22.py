@@ -1,29 +1,24 @@
 from pyspark import SparkContext
 from operator import add
+from helper import *
 import sys
 from csv import reader 
-
-def fetch_column(sc, col_id):
-	lines = sc.textFile(sys.argv[1])
-	line = lines.mapPartitions(lambda x : reader(x))
-	header = line.first()
-	line = line.filter(lambda x : x != header)
-	col = line.map(lambda x : (x[0], x[col_id]))
-	return col
 
 def check_type(n):
 	try:
 		val = float(n.replace(",", ""))
+		if c == 19 || c == 20:
+			return val.is_integer()
 		return True
 	except ValueError:
 		return False
 
-def validate(value):
+def validate(value, col_no):
 	flag = False
 	reason = "VALID"
 	if value == '':
 		reason = "NULL"
-	elif (not check_type(value)):
+	elif (not check_type(value, c)):
 		reason = "INVALID"
 	else:
 		flag = True
@@ -34,7 +29,7 @@ if __name__ == "__main__":
 	col_no = [19, 20, 21, 22]
 	for c in col_no:
 		col = fetch_column(sc, c)
-		col_validity_map = col.map(lambda x : (x[0], validate(x[1])))
+		col_validity_map = col.map(lambda x : (x[0], validate(x[1], c)))
 		invalid_col = col_validity_map.filter(lambda x : not x[1][1])
 		invalid_col = invalid_col.map(lambda x: x[1])
 		invalid_col_out = invalid_col.map(lambda x : str(x[0]) + "\t" + str(x[2]))

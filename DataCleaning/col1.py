@@ -9,7 +9,7 @@ def checkIfInvalid(x):
 
 if __name__ == "__main__":
     sc = SparkContext()
-    lines = sc.textFile("crime.csv")
+    lines = sc.textFile(sys.argv[1])
     header = lines.first()
     lines = lines.filter(lambda x: x != header)
     lines = lines.mapPartitions(lambda x: reader(x))

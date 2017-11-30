@@ -1,0 +1,310 @@
+104-14 Tapscott St.
+303 Vernon Avenue
+572 Warren Street
+Albany and Albany II
+Armstrong I
+Armstrong II
+Atlantic Terminal Site 4B
+Bay View
+Bedford-Stuyvesant Rehab
+Belmont-Sutter Area
+Berry Street - South 9th Street
+Borinquen Plaza I
+Borinquen Plaza II
+Boulevard
+Breukelen
+Brevoort
+Brown
+Brownsville
+Bushwick
+Bushwick II Groups A & C
+Bushwick II Groups B & D
+Bushwick II CDA Group E
+Carey Gardens
+Coney Island
+Coney Island Site 8
+Coney Island I Site 1B
+Coney Island I Sites 4 & 5
+Cooper Park
+Crown Heights
+Cypress Hills
+East New York City Line
+Farragut
+Fenimore-Lefferts
+Fiorentino Plaza
+Garvey Group A
+Glenmore Plaza
+Glenwood
+Gowanus
+Gravesend
+Haber
+Hope Gardens
+Howard
+Howard Avenue
+Howard Avenue-Park Place
+Hughes Apartments
+Hylan
+Independence
+Ingersoll
+Kingsborough-Kingsborough Extension
+Lafayette
+Lenox Road-Rockaway Parkway
+Linden
+Long Island Baptist Houses
+Low Houses
+Marcy
+Marcy Ave-Greene AveSite A _Site B
+Marlboro
+Nostrand
+Ocean Hill Apartments
+Ocean Hill-Brownsville
+O'Dwyer Gardens
+Palmetto Gardens
+Park Rock Rehab
+Pennsylvania Ave-Wortman Ave
+Pink
+Prospect Plaza
+Ralph Avenue Rehab
+Red Hook East
+Red Hook West
+Reid Apartments
+Roosevelt I&II
+Rutland Towers
+Saratoga Village
+Sheepshead Bay
+Sterling Place Rehabs-Buffalo
+Sterling Place Rehabs-SaintJohns
+Stuyesant Gardens 1&2
+Sumner
+Surfside_Gardens
+Sutter Avenue-Union Street
+Tapscott Street Rehab
+Taylor St-Wythe Ave
+Tilden
+Tompkins
+Unity Plaza 4-27
+Unity Plaza Sites 17, 24, 25A
+Van Dyke I&II
+Vandalia_Avenue
+Weeksville
+Whitman
+Williams Plaza
+Williamsburg
+Woodson
+Wyckoff Gardens
+1010 East 178 Street
+1162-1176 Washington Avenue
+1471 Watson Avenue
+Adams
+Bailey Ave - W 193 St
+Baychester
+Betances I
+Betances II 9A & Betances III 9A
+Betances II 13 & Betances III 13
+Betances II 18 & Betances III 18
+Betances IV
+Betances V
+Betances VI
+Boston Road Plaza
+Boston Secor
+Boynton Avenue Rehab
+Bronx River & Bronx River Addition
+Bryant Avenue-East 174 Street
+Butler
+Castle Hill
+Claremont Parkway-Franklin Ave
+Claremont Rehab (Group 2)
+Claremont Rehab (Group 3)
+Claremont Rehab (Group 4)
+Claremont Rehab (Group 5)
+Clason Point Gardens
+College Ave-East 165th Street
+Davidson
+Eagle Avenue-East 163rd Street
+East 152nd Street-Courtlandt Avenue
+East 165th Street-Bryant Avenue
+East 173rd St-Vyse Ave
+East 180th Street-Monterey Avenue
+Eastchester Gardens
+Edenwald
+Forest
+Fort Independence St-Heath Ave
+Franklin Avenue I Conventional
+Franklin Avenue II Conventional
+Franklin Avenue III Conventional
+Glebe Avenue-Westchester Avenue
+Gun Hill
+Harrison Ave Rehab Group A & Group B
+Highbridge Gardens
+Highbridge Rehabs (Anderson Avenue)
+Highbridge Rehabs (Nelson Avenue)
+Hoe Avenue-East 173 Street
+Hunts Point Avenue Rehab
+Jackson
+Longfellow Avenue Rehab
+Marble Hill
+McKinley
+Melrose
+Middletown Plaza
+Mill Brook and Mill Brook Extension
+Mitchel
+Monroe
+Moore
+Morris I
+Morris II
+Morrisania
+Morrisania Air Rights
+Mott Haven
+Murphy
+Parkside
+Patterson
+Pelham Parkway
+PSS Grandparent
+Randall-Balcom
+Sack Wern
+Sedgwick
+Sotomayor Houses
+Soundview
+South Bronx Area site 402
+St Marys Park
+Stebbins Ave- Hewitt Pl
+Teller Ave-East 166 St
+Throggs Neck
+Twin Parks East Site 9
+Twin Parks West Sites 1 & 2
+Union Ave-East 163 St
+Union Ave-East 166St
+University Avenue
+Webster
+West Farms Road Rehab
+West Farms Road CONV
+West Tremont Ave-Sedgwick Ave Area
+45 Allen Street
+131 Saint Nicholas Ave
+154 West 84 Street
+335 East 111 Street
+344 East 28 Street
+830 Amsterdam Avenue
+Amsterdam & Amsterdam Addition
+Audubon
+Baruch & Baruch Addition
+Bethune Gardens
+Bracetti Plaza
+Campos Plaza II
+Carver
+Chelsea & Chelsea Addition
+Clinton
+Corsi Houses
+De Hostos Apartments
+Douglass Addition
+Douglass I & Douglass II
+Drew-Hamilton
+Dyckman
+East River
+Elliott
+First Houses
+Fort Washington Ave Rehab
+Fulton
+Gompers
+Grampion
+Grant
+Harborview Terrace
+Harlem River
+Harlem River II
+Hernandez
+Holmes Towers
+Isaacs
+Jefferson
+Johnson
+King Towers
+La Guardia & La Guardia Addition
+Lavanburg Homes
+Lehman
+Lexington
+Lincoln
+Lower East Side I Infill
+Lower East Side II
+Lower East Side III
+Lower East Side Rehab Group 5
+Manhattanville
+Manhattanville Rehab Group 2
+Manhattanville Rehab Group 3
+Marshall Plaza
+Meltzer Tower
+Metro North Plaza
+Morris Park Senior Citizens Home
+Park Ave-East 122, 123 Streets
+Polo Grounds Towers
+Public School 139 (Conversion)
+Randolph
+Rangel
+Rehab Program (Douglass Rehabs)
+Rehab Program (Taft Rehabs)
+Rehab Program (Wise Rehab)
+Riis
+Riis II
+Robbins Plaza
+Robinson
+Rutgers
+Saint Nicholas
+Samuel (City)
+Samuel (MHOP) I
+Samuel (MHOP) II
+Samuel (MHOP) III
+Seward Park Extension
+Smith
+Stanton Street
+Straus
+Taft
+Thomas Apartments
+Two Bridges URA Site 7
+UPACA (Site 5) & UPACA (Site 6)
+Vladeck
+Vladeck II
+Wagner
+Wald
+Washington
+Washington Heights Rehab Groups 1 & 2
+Washington Heights Rehab Phase III TDS#329
+Washington Heights Rehab Phase III TDS#523
+Washington Heights Rehab Phase IV C
+Washington Heights Rehab Phase IV D
+White
+Wilson
+Wise Towers
+WSUR (Brownstones)
+WSUR (Site A) 120 W 94 Street
+WSUR (Site B) 74 W 92 Street
+WSUR (Site C) 589 Amsterdam Avenue
+Astoria
+Baisley Park
+Beach 41st Street-Beach Channel Drive
+Bland
+Carleton Manor
+Conlon Lihfe Tower
+Forest Hills
+Hammel
+International Tower
+Latimer Gardens
+Leavitt Street-34th Ave
+Ocean Bay Apartments (Bayside)
+Ocean Bay Apartments (Oceanside)
+Pomonok
+Queensbridge North
+Queensbridge South
+Ravenswood
+Redfern
+Rehab Program (College Point)
+Shelton House
+South Jamaica I
+South Jamaica II
+Woodside
+Berry
+Cassidy-Lafayette
+Mariners Harbor
+New Lane Area
+Richmond Terrace
+South Beach
+Stapleton
+Todt Hill
+West Brighton I & II

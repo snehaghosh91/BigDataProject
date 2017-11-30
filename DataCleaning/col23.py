@@ -3,31 +3,24 @@ from operator import add
 from csv import reader 
 import sys
 
-def fetch_column(sc, col_id):
-	lines = sc.textFile(sys.argv[1])
-	line = lines.mapPartitions(lambda x : reader(x))
-	header = line.first()
-	line = line.filter(lambda x : x != header)
-	col = line.map(lambda x : (x[0], x[col_id]))
-	return col
-
-def check_type(n):
+def check_type_value(lat, lon, n):
 	x = n[1:-1].split(',')
-	lat = float(x[0])
-	lon = float(x[1])
 	try:
-		val = float(lat)
-		val = float(lon)
-		return True
+		nlat = float(x[0])
+		nlon = float(x[1])
+		if float(lat) == nlat and float(lon) == nlon:
+			return True
+		else:
+			return False
 	except ValueError:
 		return False
 
-def validate(value):
+def validate(lat, lon, value):
 	flag = False
 	reason = "VALID"
 	if value == '':
 		reason = "NULL"
-	elif (not check_type(value)):
+	elif (not check_type_value(lat, lon, value)):
 		reason = "INVALID"
 	else:
 		flag = True
@@ -35,8 +28,12 @@ def validate(value):
 
 if __name__ == "__main__":
 	sc = SparkContext()
-	col = fetch_column(sc, 23)
-	col_validity_map = col.map(lambda x : (x[0], validate(x[1])))
+	lines = sc.textFile(sys.argv[1], 1)
+	line = lines.mapPartitions(lambda x : reader(x))
+	header = line.first()
+	line = line.filter(lambda x : x != header)
+	col = line.map(lambda x : (x[0], x[21], x[22], x[23]))
+	col_validity_map = col.map(lambda x : (x[0], validate(x[1], x[2], x[3])))
 	invalid_col = col_validity_map.filter(lambda x : not x[1][1])
 	invalid_col = invalid_col.map(lambda x: x[1])
 	invalid_col_out = invalid_col.map(lambda x : str(x[0]) + "\t" + str(x[2]))

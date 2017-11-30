@@ -4,10 +4,10 @@ from helper import *
 import sys
 from csv import reader 
 
-def check_type(n):
+def check_type(n, c):
 	try:
 		val = float(n.replace(",", ""))
-		if c == 19 || c == 20:
+		if c == 19 or c == 20:
 			return val.is_integer()
 		return True
 	except ValueError:
@@ -20,6 +20,14 @@ def validate(value, col_no):
 		reason = "NULL"
 	elif (not check_type(value, c)):
 		reason = "INVALID"
+	elif col_no == 19 and ((value < 909900) or (value > 1067600)):
+		return "INVALID X-COORDINATE";
+	elif col_no == 20 and ((value < 117500) or (value > 275000)):
+		return "INVALID Y-COORDINATE";
+	elif col_no == 21 and ((value < -75) or (value > -73)):
+		return "INVALID LATITUDE";
+	elif col_no == 22 and ((value < 40) or (value > 41)):
+		return "INVALID LONGITUDE";	
 	else:
 		flag = True
 	return (value, flag, reason)

@@ -24,3 +24,4 @@ if __name__ == "__main__":
     fromandtodate = lines.map(lambda x: (x[1], x[3]))
     labeledDates = fromandtodate.map(lambda x: (labelReportAsExactOrRange(x), 1)).reduceByKey(lambda a, b: a + b)
     labeledDates.saveAsTextFile("ValidityOfDates.out")
+    sc.stop()

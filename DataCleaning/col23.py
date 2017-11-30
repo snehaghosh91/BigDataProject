@@ -1,9 +1,10 @@
 from pyspark import SparkContext
 from operator import add
 from csv import reader 
+import sys
 
 def fetch_column(sc, col_id):
-	lines = sc.textFile('NYPD_Complaint_Data_Historic.csv')
+	lines = sc.textFile(sys.argv[1])
 	line = lines.mapPartitions(lambda x : reader(x))
 	header = line.first()
 	line = line.filter(lambda x : x != header)

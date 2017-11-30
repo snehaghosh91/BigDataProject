@@ -4,7 +4,7 @@ import sys
 from csv import reader 
 
 def fetch_column(sc, col_id):
-	lines = sc.textFile('NYPD_Complaint_Data_Historic.csv')
+	lines = sc.textFile(sys.argv[1])
 	line = lines.mapPartitions(lambda x : reader(x))
 	header = line.first()
 	line = line.filter(lambda x : x != header)

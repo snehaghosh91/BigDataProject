@@ -1,7 +1,6 @@
 from pyspark import SparkContext
 from operator import add
 import sys
-import re
 from csv import reader 
 
 def fetch_column(sc, col_id):
@@ -11,9 +10,10 @@ def fetch_column(sc, col_id):
 	line = line.filter(lambda x : x != header)
 	col = line.map(lambda x : (x[0], x[col_id]))
 	return col
+
 def check_type(n):
 	try:
-		val = float(n)
+		val = float(n.replace(",", ""))
 		return True
 	except ValueError:
 		return False
@@ -23,7 +23,7 @@ def validate(value):
 	reason = "VALID"
 	if value == '':
 		reason = "NULL"
-	elif (check_type(value)):
+	elif (not check_type(value)):
 		reason = "INVALID"
 	else:
 		flag = True

@@ -50,7 +50,7 @@ if __name__ == "__main__":
     validFromDates = fromIndividual.filter(lambda x:  x[2] == "VALID")
     #write output to file
     invalidFromDates.saveAsTextFile("InvalidFromDates.out")
-    validFromDates.saveAsTextFile("ValidFromDates")
+    validFromDates.saveAsTextFile("ValidFromDates.out")
 
     toIndividual = toDate.map(lambda x: (x[0], x[1], returnDateSemantic(x[1])))
     invalidToDates = toIndividual.filter(lambda x: x[2] == "INVALID")
@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     #filtering dates based on semantics and writing individual files
     exactDates = result.filter(lambda x: x[3] == "EXACT")
-    exactDates.saveAsTextFile("ExactDates.out")
+    exactDates.saveAsTextFile("exactDates.out")
     rangeDates = result.filter(lambda x: x[3] == "RANGE")
     rangeDates.saveAsTextFile("rangeDates.out")
     endPointDates = result.filter(lambda x: x[3] == "ENDPOINT")

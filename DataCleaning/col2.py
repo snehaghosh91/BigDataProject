@@ -23,7 +23,4 @@ if __name__ == "__main__":
     lines = lines.mapPartitions(lambda x: reader(x))
     fromandtodate = lines.map(lambda x: (x[1], x[3]))
     labeledDates = fromandtodate.map(lambda x: (labelReportAsExactOrRange(x), 1)).reduceByKey(lambda a, b: a + b)
-    labeledDates.saveAsTextFile("ValidityOfDates.out ")
-    print labelReportAsExactOrRange( ('12/31/2015', '') )
-    print labelReportAsExactOrRange(('', ''))
-    print labelReportAsExactOrRange(('','12/31/2015'))
+    labeledDates.saveAsTextFile("ValidityOfDates.out")

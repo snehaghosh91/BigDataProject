@@ -38,4 +38,8 @@ if __name__ == "__main__":
     validToTime = toTime.filter(lambda x: x[2] != "INVALID" and x[2] != "NULL")
     invalidToTime.saveAsTextFile("invalidToTime.out")
     validToTime.saveAsTextFile("validToTime.out")
+    topInvalidValueFrom = invalidFromTime.map(lambda x:((x[1],x[2]),1)).reduceByKey(lambda a,b:a+b)
+    topInvalidValueFrom.saveAsTextFile("topInvalidValuesFromTime.out")
+    topInvalidValueTo = invalidToTime.map(lambda x:((x[1],x[2]),1)).reduceByKey(lambda a,b:a+b)
+    topInvalidValueTo.saveAsTextFile("topInvalidValuesToTime.out")
     sc.stop()

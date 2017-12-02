@@ -16,15 +16,46 @@ def get_hadevelopt(sc):
 	data = sc.textFile("hadevelopt_ref.txt", 1).map(lambda line: str(line).encode('utf-8').upper())
 	return data.collect()
 
-def fetch_column(sc, col_id):
+def fetch_lines(sc):
 	lines = sc.textFile(sys.argv[1], 1)
-	line = lines.mapPartitions(lambda x : reader(x))
-	header = line.first()
-	line = line.filter(lambda x : x != header)
-	col = line.map(lambda x : (x[0], x[col_id]))
-	return col
+	lineList = lines.mapPartitions(lambda x : reader(x))
+	header = lineList.first()
+	lineList = lineList.filter(lambda x : x != header)
+	return lineList
 
-def validate(value, col_type = None, valid_values=None):
+def fetch_column(sc, col_id):
+	lineList = fetch_lines(sc)
+	col = lineList.map(lambda x : (x[0], x[col_id]))
+        return col
+
+def merge_key_values(key_values):
+	key = key_values[0]
+	values = key_values[1]
+	res = [key]
+	res.extend(values)
+	return res
+
+def check_int(value):
+	try:
+        	int(value)
+        	return True
+	except ValueError:
+		return False
+
+def find_reason(unique_key, value):
+	reason = None
+	if not value.strip():
+		reason = "EMPTY VALUE"
+	else:
+		reason = "INVALID"
+	return (unique_key, value, reason)
+
+def filter_description(key, desc, cols_ref):
+	if key.strip() and key in cols_ref and cols_ref[key] == desc:
+		return True
+	return False
+
+def validate(value, col_type = None, valid_values = None):
 	flag = True
 	reason = "VALID"
 	if not value.strip():
@@ -32,7 +63,10 @@ def validate(value, col_type = None, valid_values=None):
                 flag = False	
 		return (value, flag, reason)
 	elif col_type == "CLASSIFICATION CODE":
-		if not re.match('^[1-9][0-9][0-9]$', value):
+		if not check_int(value):
+			reason = "TYPE INVALID"
+			flag = False
+		elif not re.match('^[1-9][0-9][0-9]$', value):
 			reason = "INVALID"
                 	flag = False
 	elif col_type == "CRIME_STATUS":
@@ -45,19 +79,33 @@ def validate(value, col_type = None, valid_values=None):
 		if value not in valid_values:
 			reason = "INVALID"
 			flag = False
+	elif col_type == "JURIS_DESC":
+		invalid_values = ['OTHER']	
+		if value in invalid_values:
+			reason = "INVALID"
+			flag = False
 	elif col_type == "BOROUGH":
 		valid_values = ['QUEENS', 'MANHATTAN', 'BRONX', 'STATEN ISLAND', 'BROOKLYN']
 		if value not in valid_values:
 			reason = "INVALID"
 			flag = False
 	elif col_type == "PRECINCT":
-		valid_values = get_precincts()
-		if int(value) not in valid_values:
-			reason = "INVALID"
+		if not check_int(value):
 			flag = False
+			reason = "TYPE INVALID"
+		else:
+			valid_values = get_precincts()
+			if int(value) not in valid_values:
+				reason = "INVALID"
+				flag = False
 	elif col_type == "LOCATION":
 		valid_values = ['FRONT OF', 'INSIDE', 'OPPOSITE OF', 'REAR OF', 'OUTSIDE']
 		if value not in valid_values:
+			reason = "INVALID"
+			flag = False
+	elif col_type == "PREM_TYPE_DESC":
+		invalid_values = ['OTHER']	
+		if value in invalid_values:
 			reason = "INVALID"
 			flag = False
 	elif col_type == "HADEVELOPT":

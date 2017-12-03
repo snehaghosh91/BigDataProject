@@ -4,47 +4,48 @@ from helper import *
 import sys
 from csv import reader 
 
-def check_type(n, c):
-	try:
-		val = float(n.replace(",", ""))
-		if c == 19 or c == 20:
-			return val.is_integer()
-		return True
-	except ValueError:
-		return False
-
-def validate(value, col_no):
+def validate(val, col_no):
 	flag = False
 	reason = "VALID"
+	value = val
+	try:
+		value = float(val.replace(",", ""))
+		if col_no == 19 or col_no == 20:
+			check_type = value.is_integer()
+		check_type = True
+	except ValueError:
+		check_type = False
 	if value == '':
 		reason = "NULL"
-	elif (not check_type(value, c)):
+	elif (not check_type):
 		reason = "INVALID"
 	elif col_no == 19 and ((value < 909900) or (value > 1067600)):
-		return "INVALID X-COORDINATE";
+		reason = "INVALID X-COORDINATE";
 	elif col_no == 20 and ((value < 117500) or (value > 275000)):
-		return "INVALID Y-COORDINATE";
-	elif col_no == 21 and ((value < -75) or (value > -73)):
-		return "INVALID LATITUDE";
-	elif col_no == 22 and ((value < 40) or (value > 41)):
+		reason = "INVALID Y-COORDINATE";
+	elif col_no == 21 and ((value < 40) or (value > 41)):
+		reason = "INVALID LATITUDE";
+	elif col_no == 22 and ((value < -75) or (value > -73)):
 		return "INVALID LONGITUDE";	
 	else:
 		flag = True
-	return (value, flag, reason)
+	return (val, flag, reason)
 
 if __name__ == "__main__":
 	sc = SparkContext()
 	col_no = [19, 20, 21, 22]
+	col_name = ["X_COORD_CD", "Y_COORD_CD", "Latitude", "Longitude"]
 	for c in col_no:
 		col = fetch_column(sc, c)
 		col_validity_map = col.map(lambda x : (x[0], validate(x[1], c)))
 		invalid_col = col_validity_map.filter(lambda x : not x[1][1])
 		invalid_col = invalid_col.map(lambda x: x[1])
 		invalid_col_out = invalid_col.map(lambda x : str(x[0]) + "\t" + str(x[2]))
-		invalid_col_out.saveAsTextFile("col" + str(c) + "_invalid_data.out")
+		header = sc.parallelize(["CMPLNT_NUM \t "+col_name[col_no - 19]])
+		sc.union([header, invalid_col_out]).saveAsTextFile("col" + str(c) + "_invalid_data.out")
 		valid_col = col_validity_map.filter(lambda x : x[1][1])
 		valid_col_out = valid_col.map(lambda x : str(x[0]) + "\t" + str(x[1][0]) + "\t" + str(x[1][2]))
-		valid_col_out.saveAsTextFile("col" + str(c) + "_valid_data.out")
+		sc.union([header, invalid_col_out]).saveAsTextFile("col" + str(c) + "_valid_data.out")
 		counts = sc.parallelize(["INVALID COUNT:\t" + str(invalid_col.count()), "VALID COUNT:\t" + str(valid_col.count())]);
 		if not invalid_col.isEmpty():
 			invalid_count_map = invalid_col.map(lambda x : ((x[0],x[2]), 1)).reduceByKey(add)

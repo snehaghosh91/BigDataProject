@@ -48,21 +48,29 @@ if __name__ == "__main__":
 
     rptDate = rptDate.map(lambda x: (x[0],x[1],returnDateSemantic(x[1])))
     validRptDate = rptDate.filter(lambda x: x[2] == "VALID")
-    invalidRptDate = rptDate.filter(lambda x: x[2] == "INVALID")
+    validRptDate = validRptDate.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
+
     validRptDate.saveAsTextFile("col5_valid_data.out")
+    invalidRptDate = rptDate.filter(lambda x: x[2] == "INVALID")
+    invalidRptDate = invalidRptDate.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     invalidRptDate.saveAsTextFile("col5_invalid_data.out")
 
     # individual filtering on both dates respectively
     fromIndividual = fromDate.map(lambda x: (x[0], x[1], returnDateSemantic(x[1])))
     invalidFromDates = fromIndividual.filter(lambda x:  x[2] == "INVALID")
+    invalidFromDates = invalidFromDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     validFromDates = fromIndividual.filter(lambda x:  x[2] == "VALID")
+    validFromDates = validFromDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     #write output to file
+    # header = sc.parallelize(["CMPLNT_NUM \t Lat_Lon"])
     invalidFromDates.saveAsTextFile("col1_invalid_data.out")
     validFromDates.saveAsTextFile("col1_valid_data.out")
 
     toIndividual = toDate.map(lambda x: (x[0], x[1], returnDateSemantic(x[1])))
     invalidToDates = toIndividual.filter(lambda x: x[2] == "INVALID")
+    invalidToDates = invalidToDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     validToDates = toIndividual.filter(lambda x: x[2] == "VALID")
+    validToDates = validToDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     #write dates to file
     invalidToDates.saveAsTextFile("col3_invalid_data.out")
     validToDates.saveAsTextFile("col3_valid_data.out")
@@ -74,8 +82,10 @@ if __name__ == "__main__":
 
     result = fromandtodate.map(lambda x: (x[0], x[1], x[2], labelReportAsExactOrRange(x[1:])))
     invalidDates = result.filter(lambda x: x[3] == "INVALID")
+    invalidDates = invalidDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     invalidDates.saveAsTextFile("col1_3_invalid_data.out")
     validDates = result.filter(lambda x: x[3] != "INVALID")
+    validDates = validDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     validDates.saveAsTextFile("col1_3_valid_data.out")
 
     #filtering dates based on semantics and writing individual files

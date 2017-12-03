@@ -51,20 +51,20 @@ if __name__ == "__main__":
     toTime = lines.map(lambda x: (x[0], x[4], checkTimeValidity(str(x[4]))))
 
     invalidFromTime = fromTime.filter(lambda x: x[2] == "INVALID" or x[2] == "NULL")
-    invalidFromTime.saveAsTextFile("col2_invalid.out")
+    invalidFromTime.saveAsTextFile("col2_invalid_data.out")
 
     validFromTime = fromTime.filter(lambda x: x[1] != "INVALID" and x[2] != "NULL")
-    validFromTime.saveAsTextFile("col2_valid.out")
+    validFromTime.saveAsTextFile("col2_valid_data.out")
     #correct data
     validFromTime = fromTime.filter(lambda x: x[2] != "NULL")
     validFromTime = validFromTime.map(lambda x: (x[0], returnCorrectedTime(x[1]), "VALID"))
     validFromTime.saveAsTextFile("col2_corrected.out")
 
     invalidToTime = toTime.filter(lambda x: x[2] == "INVALID" or x[2] == "NULL")
-    invalidToTime.saveAsTextFile("col4_invalid.out")
+    invalidToTime.saveAsTextFile("col4_invalid_data.out")
 
     validToTime = toTime.filter(lambda x: x[2] != "INVALID" and x[2] != "NULL")
-    validToTime.saveAsTextFile("col4_valid.out")
+    validToTime.saveAsTextFile("col4_valid_data.out")
     #correct data
     validToTime = toTime.filter(lambda x: x[2] != "NULL")
     validToTime = validToTime.map(lambda x: (x[0], returnCorrectedTime(x[1]), "VALID"))

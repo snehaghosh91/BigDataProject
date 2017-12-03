@@ -42,22 +42,22 @@ if __name__ == "__main__":
     lines = lines.filter(lambda x: x != header)
     lines = lines.mapPartitions(lambda x: reader(x))
     fromDate = lines.map(lambda x: (x[0],x[1]) )
-    toDate = lines.map(lambda x: (x[0],x[3]) )
+    toDate = lines.map(lambda x: (x[0],x[3]))
 
     # individual filtering on both dates respectively
     fromIndividual = fromDate.map(lambda x: (x[0], x[1], returnDateSemantic(x[1])))
     invalidFromDates = fromIndividual.filter(lambda x:  x[2] == "INVALID")
     validFromDates = fromIndividual.filter(lambda x:  x[2] == "VALID")
     #write output to file
-    invalidFromDates.saveAsTextFile("InvalidFromDates.out")
-    validFromDates.saveAsTextFile("ValidFromDates.out")
+    invalidFromDates.saveAsTextFile("col1_invalid_data.out")
+    validFromDates.saveAsTextFile("col1_valid_data.out")
 
     toIndividual = toDate.map(lambda x: (x[0], x[1], returnDateSemantic(x[1])))
     invalidToDates = toIndividual.filter(lambda x: x[2] == "INVALID")
     validToDates = toIndividual.filter(lambda x: x[2] == "VALID")
     #write dates to file
-    invalidToDates.saveAsTextFile("InvalidToDates.out")
-    validToDates.saveAsTextFile("ValidToDates.out")
+    invalidToDates.saveAsTextFile("col3_invalid_data.out")
+    validToDates.saveAsTextFile("col3_valid_data.out")
     #validDates = validFromDates.join(validToDates)
     #individual filtering complete
 
@@ -66,9 +66,9 @@ if __name__ == "__main__":
 
     result = fromandtodate.map(lambda x: (x[0], x[1], x[2], labelReportAsExactOrRange(x[1:])))
     invalidDates = result.filter(lambda x: x[3] == "INVALID")
-    invalidDates.saveAsTextFile("InvalidSematicDates.out")
+    invalidDates.saveAsTextFile("col1_3_invalid_data.out")
     validDates = result.filter(lambda x: x[3] != "INVALID")
-    validDates.saveAsTextFile("ValidSematicDates.out")
+    validDates.saveAsTextFile("col1_3_valid_data.out")
 
     #filtering dates based on semantics and writing individual files
     exactDates = result.filter(lambda x: x[3] == "EXACT")

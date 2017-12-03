@@ -42,7 +42,15 @@ if __name__ == "__main__":
     lines = lines.filter(lambda x: x != header)
     lines = lines.mapPartitions(lambda x: reader(x))
     fromDate = lines.map(lambda x: (x[0],x[1]) )
-    toDate = lines.map(lambda x: (x[0],x[3]))
+
+    toDate = lines.map(lambda x: (x[0],x[3]) )
+    rptDate = lines.map(lambda x: (x[0],x[5]))
+
+    rptDate = rptDate.map(lambda x: (x[0],x[1],returnDateSemantic(x[1])))
+    validRptDate = rptDate.filter(lambda x: x[2] == "VALID")
+    invalidRptDate = rptDate.filter(lambda x: x[2] == "INVALID")
+    validRptDate.saveAsTextFile("col5_valid_data.out")
+    invalidRptDate.saveAsTextFile("col5_invalid_data.out")
 
     # individual filtering on both dates respectively
     fromIndividual = fromDate.map(lambda x: (x[0], x[1], returnDateSemantic(x[1])))

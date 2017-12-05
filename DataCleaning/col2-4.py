@@ -51,24 +51,32 @@ if __name__ == "__main__":
     toTime = lines.map(lambda x: (x[0], x[4], checkTimeValidity(str(x[4]))))
 
     invalidFromTime = fromTime.filter(lambda x: x[2] == "INVALID" or x[2] == "NULL")
+    invalidFromTime = invalidFromTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     invalidFromTime.saveAsTextFile("col2_invalid_data.out")
 
     validFromTime = fromTime.filter(lambda x: x[1] != "INVALID" and x[2] != "NULL")
+    validFromTime = validFromTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     validFromTime.saveAsTextFile("col2_valid_data.out")
     #correct data
     validFromTime = fromTime.filter(lambda x: x[2] != "NULL")
     validFromTime = validFromTime.map(lambda x: (x[0], returnCorrectedTime(x[1]), "VALID"))
-    validFromTime.saveAsTextFile("col2_corrected.out")
+    validFromTime = validFromTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
+    colName = sc.parallelize(["CMPLNT_NUM \t CMPLNT_FR_TM"])
+    sc.union([colName, validFromTime]).saveAsTextFile("col2_corrected.out")
 
     invalidToTime = toTime.filter(lambda x: x[2] == "INVALID" or x[2] == "NULL")
+    invalidToTime = invalidToTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     invalidToTime.saveAsTextFile("col4_invalid_data.out")
 
     validToTime = toTime.filter(lambda x: x[2] != "INVALID" and x[2] != "NULL")
+    validToTime = validToTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     validToTime.saveAsTextFile("col4_valid_data.out")
     #correct data
     validToTime = toTime.filter(lambda x: x[2] != "NULL")
     validToTime = validToTime.map(lambda x: (x[0], returnCorrectedTime(x[1]), "VALID"))
-    validToTime.saveAsTextFile("col4_corrected.out")
+    validToTime = validToTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
+    colName = sc.parallelize(["CMPLNT_NUM \t CMPLNT_TO_TM"])
+    sc.union([colName, validToTime]).saveAsTextFile("col4_corrected.out")
 
     topInvalidValueFrom = invalidFromTime.map(lambda x:((x[1],x[2]),1)).reduceByKey(lambda a,b:a+b)
     topInvalidValueFrom.saveAsTextFile("col2_statistics.out")

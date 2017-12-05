@@ -49,11 +49,11 @@ if __name__ == "__main__":
     rptDate = rptDate.map(lambda x: (x[0],x[1],returnDateSemantic(x[1])))
     validRptDate = rptDate.filter(lambda x: x[2] == "VALID")
     validRptDate = validRptDate.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
-
-    validRptDate.saveAsTextFile("col5_valid_data.out")
+    colName = sc.parallelize(["CMPLNT_NUM \t RPT_DT"])
+    sc.union([colName, validRptDate]).saveAsTextFile("col5_valid_data.out")
     invalidRptDate = rptDate.filter(lambda x: x[2] == "INVALID")
     invalidRptDate = invalidRptDate.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
-    invalidRptDate.saveAsTextFile("col5_invalid_data.out")
+    sc.union([colName, invalidRptDate]).saveAsTextFile("col5_invalid_data.out")
 
     # individual filtering on both dates respectively
     fromIndividual = fromDate.map(lambda x: (x[0], x[1], returnDateSemantic(x[1])))
@@ -62,7 +62,6 @@ if __name__ == "__main__":
     validFromDates = fromIndividual.filter(lambda x:  x[2] == "VALID")
     validFromDates = validFromDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
     #write output to file
-    # header = sc.parallelize(["CMPLNT_NUM \t Lat_Lon"])
     invalidFromDates.saveAsTextFile("col1_invalid_data.out")
     validFromDates.saveAsTextFile("col1_valid_data.out")
 
@@ -83,10 +82,12 @@ if __name__ == "__main__":
     result = fromandtodate.map(lambda x: (x[0], x[1], x[2], labelReportAsExactOrRange(x[1:])))
     invalidDates = result.filter(lambda x: x[3] == "INVALID")
     invalidDates = invalidDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
-    invalidDates.saveAsTextFile("col1_3_invalid_data.out")
+    colName = sc.parallelize(["CMPLNT_NUM \t CMPLNT_FR_DT \t CMPLNT_TO_DT"])
+    sc.union([colName, invalidDates]).saveAsTextFile("col1_3_invalid_data.out")
     validDates = result.filter(lambda x: x[3] != "INVALID")
     validDates = validDates.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
-    validDates.saveAsTextFile("col1_3_valid_data.out")
+    colName = sc.parallelize(["CMPLNT_NUM \t CMPLNT_FR_DT \t CMPLNT_TO_DT"])
+    sc.union([colName, validDates]).saveAsTextFile("col1_3_valid_data.out")
 
     #filtering dates based on semantics and writing individual files
     exactDates = result.filter(lambda x: x[3] == "EXACT")

@@ -35,12 +35,12 @@ if __name__ == "__main__":
 	col = line.map(lambda x : (x[0], x[21], x[22], x[23]))
 	col_validity_map = col.map(lambda x : (x[0], validate(x[1], x[2], x[3])))
 	invalid_col = col_validity_map.filter(lambda x : not x[1][1])
-	invalid_col_out = invalid_col.map(lambda x : str(x[0]) + "\t" + str(x[2]))
-	header = sc.parallelize(["CMPLNT_NUM \t Lat_Lon"])
-	sc.union([header, invalid_col_out]).saveAsTextFile("col23_invalid_data.out")
+	invalid_col_out = invalid_col.map(lambda x : str(x[0]) + "\t" + str(x[1][0]) + "\t" + str(x[1][2]))
+	colName = sc.parallelize(["CMPLNT_NUM \t Lat_Lon"])
+	sc.union([colName, invalid_col_out]).saveAsTextFile("col23_invalid_data.out")
 	valid_col = col_validity_map.filter(lambda x : x[1][1])
 	valid_col_out = valid_col.map(lambda x : str(x[0]) + "\t" + str(x[1][0]) + "\t" + str(x[1][2]))
-	sc.union([header, valid_col_out]).saveAsTextFile("col23_valid_data.out")
+	sc.union([colName, valid_col_out]).saveAsTextFile("col23_valid_data.out")
 	counts = sc.parallelize(["INVALID COUNT:\t" + str(invalid_col.count()), "VALID COUNT:\t" + str(valid_col.count())]);
 	if not invalid_col.isEmpty():
 		invalid_col = invalid_col.map(lambda x: x[1])

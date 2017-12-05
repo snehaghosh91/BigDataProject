@@ -61,7 +61,8 @@ if __name__ == "__main__":
     validFromTime = fromTime.filter(lambda x: x[2] != "NULL")
     validFromTime = validFromTime.map(lambda x: (x[0], returnCorrectedTime(x[1]), "VALID"))
     validFromTime = validFromTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
-    validFromTime.saveAsTextFile("col2_corrected.out")
+    colName = sc.parallelize(["CMPLNT_NUM \t CMPLNT_FR_TM"])
+    sc.union([colName, validFromTime]).saveAsTextFile("col2_corrected.out")
 
     invalidToTime = toTime.filter(lambda x: x[2] == "INVALID" or x[2] == "NULL")
     invalidToTime = invalidToTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
@@ -74,7 +75,8 @@ if __name__ == "__main__":
     validToTime = toTime.filter(lambda x: x[2] != "NULL")
     validToTime = validToTime.map(lambda x: (x[0], returnCorrectedTime(x[1]), "VALID"))
     validToTime = validToTime.map(lambda x : str(x[0]) + "\t" + str(x[1]) + "\t" + str(x[2]))
-    validToTime.saveAsTextFile("col4_corrected.out")
+    colName = sc.parallelize(["CMPLNT_NUM \t CMPLNT_TO_TM"])
+    sc.union([colName, validToTime]).saveAsTextFile("col4_corrected.out")
 
     topInvalidValueFrom = invalidFromTime.map(lambda x:((x[1],x[2]),1)).reduceByKey(lambda a,b:a+b)
     topInvalidValueFrom.saveAsTextFile("col2_statistics.out")

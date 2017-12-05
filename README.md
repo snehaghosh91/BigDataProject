@@ -12,22 +12,23 @@ Crime Dataset Link - https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-
 
 ## Part 1 - Data Cleaning
 **Steps to Reproduce Results**
-1. Download dataset from Crime Dataset Link provided above. Rename file as 'crime.csv'.
+1. Download dataset from Crime Dataset Link provided above. Rename file as 'NYPD_Complaint_Data_Historic.csv'.
 2. Login to hadoop cluster. Create directory project.
 3. Copy csv file from local to the hadoop cluster in project directory -
 
-   **Command**: scp -r crime.csv NetID@dumbo.es.its.nyu.edu:/home/NetID/project/ .
+   **Command**: scp -r NYPD_Complaint_Data_Historic.csv NetID@dumbo.es.its.nyu.edu:/home/NetID/project/ .
    
    Also copy the scripts you want to run to the hadoop cluster.
 4. Put the csv file into the Hadoop File system -
 
-   **Command**: hfs -put crime.csv
+   **Command**: hfs -put NYPD_Complaint_Data_Historic.csv
    
 5. Running script for individual columns (Eg. for column 10)- 
    
-   **Command**: spark-submit --py-files=helper.py col10.py crime_data.csv
+   **Command**: spark-submit --py-files=helper.py col10.py NYPD_Complaint_Data_Historic.csv
    
 6. To obtain cleaned csv file with all columns
 
-  **Run script** ./execute.sh
-  Then Run **Command**: spark-submit --py-files=helper.py merge.py
+    **Run script** ./execute.sh
+
+    Then Run **Command**: spark-submit --py-files=helper.py merge.py

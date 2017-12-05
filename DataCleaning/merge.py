@@ -1,5 +1,6 @@
 from pyspark import SparkContext
 from csv import reader
+from helper import *
 
 res = ''
 def create_csv(x, flag):
@@ -33,12 +34,16 @@ if __name__ == "__main__":
 			lines = sc.textFile("col"+ str(i) +"_corrected.out", 1)
 		else:
 			lines = sc.textFile("col"+ str(i) +"_valid_data.out", 1)
-		if i == 1:
-			lines = lines.map(lambda x:(x.split('\t')[0],(x.split('\t')[1],x.split('\t')[2])))
-			data = lines
+		if i == 17 or i == 18:
+			col = fetch_column(sc, 17)
+			lines = col.map(lambda x:(x[0],x[1]))
 		else:
-			lines = lines.map(lambda x:(x.split('\t')[0],x.split('\t')[1]))
-			data = data.join(lines)
+			if i == 1:
+				lines = lines.map(lambda x:(x.split('\t')[0],(x.split('\t')[1],x.split('\t')[2])))
+				data = lines
+			else:
+				lines = lines.map(lambda x:(x.split('\t')[0],x.split('\t')[1]))
+				data = data.join(lines)
 		if i == 23:
 			data = data.map(lambda x: create_csv(x, 1))
 			data = data.map(lambda x: reorder(x))

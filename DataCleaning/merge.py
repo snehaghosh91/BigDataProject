@@ -37,6 +37,7 @@ if __name__ == "__main__":
 		if i == 17 or i == 18:
 			col = fetch_column(sc, 17)
 			lines = col.map(lambda x:(x[0],x[1]))
+			data = data.join(lines)
 		else:
 			if i == 1:
 				lines = lines.map(lambda x:(x.split('\t')[0],(x.split('\t')[1],x.split('\t')[2])))

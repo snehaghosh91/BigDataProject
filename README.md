@@ -31,4 +31,8 @@ Crime Dataset Link - https://data.cityofnewyork.us/Public-Safety/NYPD-Complaint-
 
     **Run script** ./execute.sh
 
-    Then Run **Command**: spark-submit --py-files=helper.py merge.py
+    Then Run **Command**: spark-submit --py-files=helper.py merge.py NYPD_Complaint_Data_Historic.csv
+    
+7. Cleaned csv can be obtained using below command
+
+   **Command**:hfs -getmerge data.csv cleaned.csv

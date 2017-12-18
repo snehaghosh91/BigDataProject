@@ -32,7 +32,7 @@ if __name__ == "__main__":
     generate_csv(queens, "year", "QUEENS");
     generate_csv(bronx, "year", "BRONX");
     generate_csv(brooklyn, "year", "BROOKLYN");
-    generate_csv(staten, "year", "STATEN ISLAND");
+    generate_csv(staten, "year", "STATEN_ISLAND");
 
     #col = fetch_column(sc, 14)
 	#col_formatted = col.map(lambda x: x[1]).map(lambda x: dt.strptime(x, '%m/%d/%Y'))

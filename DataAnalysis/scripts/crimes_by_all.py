@@ -22,3 +22,4 @@ if __name__ == "__main__":
 	col = fetch_column(sc, 15)
 	count_map = get_count_map(col)
 	count_map.saveAsTextFile("crimes_loc_occ.csv")
+	sc.stop()

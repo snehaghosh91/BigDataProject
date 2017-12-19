@@ -21,3 +21,4 @@ if __name__ == "__main__":
 	col_count = col.reduceByKey(lambda x,y: x+y)
 	col_map = col_count.map(lambda x: str(x[0]) + "," + str(x[1]))
 	col_map.saveAsTextFile("crimes_by_time.csv")
+	sc.stop()

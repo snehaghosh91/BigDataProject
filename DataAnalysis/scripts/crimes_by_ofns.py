@@ -18,3 +18,4 @@ if __name__ == "__main__":
 		c = c.reduceByKey(add)
 		c = c.map(lambda x: str(x[0]) + "," + str(x[1]) + "," + str(val))
 		c.saveAsTextFile("ofns_by_year_%s.csv" % index)
+	sc.stop()

@@ -18,3 +18,4 @@ if __name__ == "__main__":
 	col_formatted = col.map(lambda x: x[1]).map(lambda x: dt.strptime(x, '%m/%d/%Y'))
 	generate_csv(col_formatted, "year")
 	generate_csv(col_formatted, "month")
+	sc.stop()

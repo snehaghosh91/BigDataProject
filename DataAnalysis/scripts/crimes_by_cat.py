@@ -12,3 +12,4 @@ if __name__ == "__main__":
                 c = col_formatted.filter(lambda x: x[1] == val).map(lambda x: (x[0], 1))
                 c = c.reduceByKey(add)
                 c.saveAsTextFile("%s_by_year.csv" % val.lower())
+	sc.stop()

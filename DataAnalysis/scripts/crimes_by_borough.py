@@ -33,10 +33,4 @@ if __name__ == "__main__":
     generate_csv(bronx, "year", "BRONX");
     generate_csv(brooklyn, "year", "BROOKLYN");
     generate_csv(staten, "year", "STATEN_ISLAND");
-
-    #col = fetch_column(sc, 14)
-	#col_formatted = col.map(lambda x: x[1]).map(lambda x: dt.strptime(x, '%m/%d/%Y'))
-	#generate_csv(col_formatted, "year")
-	#generate_csv(col_formatted, "month")
-
-    #filter out year from borough date and make RDDS;
+    sc.stop();

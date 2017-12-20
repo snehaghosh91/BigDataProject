@@ -31,3 +31,4 @@ if __name__ == "__main__":
     generate_csv(bronx, "BRONX");
     generate_csv(brooklyn, "BROOKLYN");
     generate_csv(staten, "STATEN_ISLAND");
+    sc.stop();
